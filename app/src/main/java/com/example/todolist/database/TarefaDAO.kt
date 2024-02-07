@@ -52,7 +52,9 @@ class TarefaDAO(context: Context) : ITarefaDAO {
         val indiceDescricao = cursor.getColumnIndex(DataBaseHelper.COLUNA_DESCRICAO)
         val indiceData = cursor.getColumnIndex(DataBaseHelper.COLUNA_DATA_CADASTRO)
 
-        while (cursor.moveToNext()) {
+        if (indiceId != -1 && indiceDescricao != -1 && indiceData != -1) {
+
+            while (cursor.moveToNext()) {
             val idTarefa = cursor.getInt(indiceId)
             val descricao = cursor.getString(indiceDescricao)
             val data = cursor.getString(indiceData)
@@ -60,6 +62,8 @@ class TarefaDAO(context: Context) : ITarefaDAO {
             listaTarefas.add(
                 Tarefa(idTarefa, descricao, data)
             )
+        }}else {
+            Log.i("info_db", "1 coluna ou mais estao invalidas")
         }
 
         return listaTarefas

@@ -24,7 +24,7 @@ class AdicionarTarefaActivity : AppCompatActivity() {
 
                 val descricao = biding.editTarefa.text.toString()
                 val tarefa = Tarefa(
-                    -1, descricao, "default"
+                    0, descricao, "default"
                 )
 
                 val tarefaDAO = TarefaDAO(this)

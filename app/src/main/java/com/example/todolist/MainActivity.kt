@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AdicionarTarefaActivity::class.java)
             startActivity(intent)
         }
+
+
     }
 
     override fun onStart() {
@@ -31,10 +33,13 @@ class MainActivity : AppCompatActivity() {
       //  setContentView(biding.root)
 
         val tarefaDAO = TarefaDAO(this)
-        listaTarefa = tarefaDAO.listar()
-
-        listaTarefa.forEach{ tarefa ->
-            Log.i("info_db", "${tarefa.descricao} \n")
+        try {
+            listaTarefa = tarefaDAO.listar()
+            listaTarefa.forEach { tarefa ->
+                Log.i("info_db", "${tarefa.descricao} \n")
+            }
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error retrieving tasks: ${e.message}")
         }
 
     }
