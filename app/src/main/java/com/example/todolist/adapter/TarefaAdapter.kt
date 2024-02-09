@@ -24,7 +24,9 @@ class TarefaAdapter() : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>() {
             binding = itemBinding
         }
 
-        fun bind(){
+        fun bind(tarefa: Tarefa){
+            binding.textDescricao.text = tarefa.descricao
+            binding.textData.text = tarefa.dataCadastro
         }
 
     }
@@ -39,7 +41,7 @@ class TarefaAdapter() : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>() {
 
     override fun onBindViewHolder(holder: TarefaViewHolder, position: Int) {
         val tarefa = listaTarefas[position]
-        holder.bind()
+        holder.bind(tarefa)
     }
 
     override fun getItemCount(): Int {

@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todolist.adapter.TarefaAdapter
 import com.example.todolist.database.TarefaDAO
 import com.example.todolist.databinding.ActivityMainBinding
 import com.example.todolist.model.Tarefa
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var listaTarefa = emptyList<Tarefa>()
+    private var tarefaAdapter: TarefaAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,23 +28,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // recycle review
+        tarefaAdapter = TarefaAdapter()
+        biding.rvTarefas.adapter = tarefaAdapter
+
+        biding.rvTarefas.layoutManager = LinearLayoutManager(this)
 
     }
 
+    private fun atualizarListaTarefas(){
+        val tarefaDAO = TarefaDAO(this)
+        listaTarefa = tarefaDAO.listar()
+        tarefaAdapter?.adicionarLista(listaTarefa)
+    }
     override fun onStart() {
         super.onStart()
-      //  setContentView(biding.root)
 
-        val tarefaDAO = TarefaDAO(this)
-        try {
-            listaTarefa = tarefaDAO.listar()
-            listaTarefa.forEach { tarefa ->
-                Log.i("info_db", "${tarefa.descricao} \n")
-            }
-        } catch (e: Exception) {
-            Log.e("MainActivity", "Error retrieving tasks: ${e.message}")
-        }
-
+        atualizarListaTarefas()
     }
 
 }

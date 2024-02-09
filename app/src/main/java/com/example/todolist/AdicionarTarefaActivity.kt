@@ -24,14 +24,15 @@ class AdicionarTarefaActivity : AppCompatActivity() {
 
                 val descricao = biding.editTarefa.text.toString()
                 val tarefa = Tarefa(
-                    0, descricao, "default"
+                    -1, descricao, "default"
                 )
 
                 val tarefaDAO = TarefaDAO(this)
                if (tarefaDAO.salvar(tarefa)){
                    Toast.makeText(this,
                        "Tarefa cadastrada com sucesso",
-                       Toast.LENGTH_SHORT).show()
+                       Toast.LENGTH_SHORT
+                   ).show()
                    finish()
                }
             }else{
@@ -43,7 +44,5 @@ class AdicionarTarefaActivity : AppCompatActivity() {
 
     }
 
-    private fun salvar() {
 
-    }
 }
