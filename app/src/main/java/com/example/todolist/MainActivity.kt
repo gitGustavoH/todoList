@@ -6,44 +6,46 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.adapter.TarefaAdapter
-import com.example.todolist.database.TarefaDAO
 import com.example.todolist.databinding.ActivityMainBinding
 import com.example.todolist.model.Tarefa
+import com.jamiltondamasceno.applistatarefas.database.TarefaDAO
 
 class MainActivity : AppCompatActivity() {
 
-    private val biding by lazy {
+    private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-
-    private var listaTarefa = emptyList<Tarefa>()
+    private var listaTarefas = emptyList<Tarefa>()
     private var tarefaAdapter: TarefaAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(biding.root)
+        setContentView(binding.root)
 
-        biding.fabAdicionar.setOnClickListener {
+        binding.fabAdicionar.setOnClickListener {
             val intent = Intent(this, AdicionarTarefaActivity::class.java)
-            startActivity(intent)
+            startActivity( intent )
         }
 
-        // recycle review
+        //Recyclerview
         tarefaAdapter = TarefaAdapter()
-        biding.rvTarefas.adapter = tarefaAdapter
+        binding.rvTarefas.adapter = tarefaAdapter
 
-        biding.rvTarefas.layoutManager = LinearLayoutManager(this)
+        binding.rvTarefas.layoutManager = LinearLayoutManager(this)
+
 
     }
 
     private fun atualizarListaTarefas(){
+
         val tarefaDAO = TarefaDAO(this)
-        listaTarefa = tarefaDAO.listar()
-        tarefaAdapter?.adicionarLista(listaTarefa)
+        listaTarefas = tarefaDAO.listar()
+        tarefaAdapter?.adicionarLista( listaTarefas )
+
     }
+
     override fun onStart() {
         super.onStart()
-
         atualizarListaTarefas()
     }
 

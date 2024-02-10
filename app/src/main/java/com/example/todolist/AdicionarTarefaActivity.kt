@@ -3,46 +3,50 @@ package com.example.todolist
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.todolist.database.TarefaDAO
 import com.example.todolist.databinding.ActivityAdicionarTarefaBinding
 import com.example.todolist.databinding.ActivityMainBinding
 import com.example.todolist.model.Tarefa
+import com.jamiltondamasceno.applistatarefas.database.TarefaDAO
 
 class AdicionarTarefaActivity : AppCompatActivity() {
 
-
-    private val biding by lazy {
+    private val binding by lazy {
         ActivityAdicionarTarefaBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(biding.root)
+        setContentView(binding.root)
 
-        biding.btnSalvar.setOnClickListener {
-            if (biding.editTarefa.text.isNotEmpty()){
+        binding.btnSalvar.setOnClickListener {
 
-                val descricao = biding.editTarefa.text.toString()
+            if ( binding.editTarefa.text.isNotEmpty() ){
+
+                val descricao = binding.editTarefa.text.toString()
                 val tarefa = Tarefa(
                     -1, descricao, "default"
                 )
 
                 val tarefaDAO = TarefaDAO(this)
-               if (tarefaDAO.salvar(tarefa)){
-                   Toast.makeText(this,
-                       "Tarefa cadastrada com sucesso",
-                       Toast.LENGTH_SHORT
-                   ).show()
-                   finish()
-               }
+                if( tarefaDAO.salvar(tarefa) ){
+                    Toast.makeText(
+                        this,
+                        "Tarefa cadastrada com sucesso",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                }
+
             }else{
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "Preencha uma tarefa",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+
         }
 
     }
-
 
 }
