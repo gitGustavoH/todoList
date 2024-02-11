@@ -3,6 +3,7 @@ package com.jamiltondamasceno.applistatarefas.database
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import androidx.core.content.contentValuesOf
 import com.example.todolist.database.DataBaseHelper
 import com.example.todolist.database.ITarefaDAO
 import com.example.todolist.model.Tarefa
@@ -35,7 +36,23 @@ class TarefaDAO(context: Context) : ITarefaDAO {
     }
 
     override fun atualizar(tarefa: Tarefa): Boolean {
-        TODO("Not yet implemented")
+        val args = arrayOf(tarefa.idTarefa.toString())
+        val conteudo = ContentValues()
+        conteudo.put("${DataBaseHelper.COLUNA_DESCRICAO}", tarefa.descricao)
+        try {
+            escrita.update(
+                DataBaseHelper.NOME_TABELA_TAREFAS,
+                conteudo,
+                "${DataBaseHelper.COLUNA_ID_TAREFA} = ?",
+                args
+            )
+            Log.i("info_db", "Sucesso ao atualizar tarefa")
+        }catch (e: Exception){
+            e.printStackTrace()
+            Log.i("info_db", "Erro ao atualizar tarefa")
+            return false
+        }
+        return true
     }
 
     override fun remover(idTarefa: Int): Boolean {

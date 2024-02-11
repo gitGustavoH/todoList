@@ -34,6 +34,10 @@ class TarefaAdapter(
             binding.btnExcluir.setOnClickListener {
                 onCLickExcluir(tarefa.idTarefa)
             }
+
+            binding.btnEditar.setOnClickListener {
+                onClickEditar(tarefa)
+            }
         }
 
     }

@@ -31,11 +31,19 @@ class MainActivity : AppCompatActivity() {
         //Recyclerview
         tarefaAdapter = TarefaAdapter(
             { id -> confirmarExclusao(id)},
-            {}
+            {tarefa ->  editar(tarefa)}
         )
         binding.rvTarefas.adapter = tarefaAdapter
 
         binding.rvTarefas.layoutManager = LinearLayoutManager(this)
+
+
+    }
+
+    private fun editar(tarefa: Tarefa) {
+        val intent = Intent(this, AdicionarTarefaActivity::class.java)
+        intent.putExtra("tarefa", tarefa)
+        startActivity(intent)
 
 
     }
