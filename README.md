@@ -6,7 +6,7 @@
 <p>Nesse projeto eu aprendi conceitos e apliquei sobre <bold>Banco de dados (SQLite)</bold> como por exemplo: padrão de projetos <b>DAO</b>, <b>CRUD</b> e <b>DataBaseHelper</b></p>
 <p>Além de fixar conceitos como <b>Adapter</b> para uso do Recycle view</p>
 
-<h2>Oque eu usei no projeto e aprendi em geral:</h2>
+<h2>Oque eu usei no projeto e aprendi no geral:</h2>
 <p>Kotlin, Adapter com Recycle view, SQLite: CRUD, DAO e DataBaseHelper.</p>
 
 <h2>FOTOS DO PROJETO:</h2>
